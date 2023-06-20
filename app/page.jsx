@@ -1,3 +1,5 @@
+import Feed from '@components/Feed'
+
 const Home = () => {
   return (
     <section className="w-full flex-center flex-col">
@@ -9,6 +11,7 @@ const Home = () => {
       <p className="desc text-center">
         Quoteit is a website to discover, create and share quotes
       </p>
+      <Feed />
     </section>
   );
 };
