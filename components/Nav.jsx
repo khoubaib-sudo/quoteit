@@ -40,7 +40,7 @@ const Nav = () => {
             </button>
             <Link href="/profile">
               <Image
-                src="/assets/images/avvatar.png"
+                src={session?.user.image}
                 width={37}
                 height={37}
                 className="rounded-full"
@@ -56,7 +56,7 @@ const Nav = () => {
                   type="button"
                   key={provider.name}
                   onClick={() => signIn(provider.id)}
-                  className="black_btn"
+                  className="white_btn"
                 >
                   Sign In
                 </button>
@@ -69,7 +69,7 @@ const Nav = () => {
         {session?.user ? (
           <div className="flex">
             <Image
-              src="/assets/images/avvatar.png"
+              src={session?.user.image}
               width={37}
               height={37}
               className="rounded-full"
@@ -110,12 +110,12 @@ const Nav = () => {
             {providers &&
               Object.values(providers).map((provider) => (
                 <button
-                  type='button'
+                  type="button"
                   key={provider.name}
                   onClick={() => {
                     signIn(provider.id);
                   }}
-                  className='black_btn'
+                  className="white_btn"
                 >
                   Sign in
                 </button>
