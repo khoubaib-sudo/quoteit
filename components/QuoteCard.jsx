@@ -4,6 +4,8 @@ import { useState } from "react";
 import Image from "next/image";
 import { useSession } from "next-auth/react";
 import { usePathname, useRouter } from "next/navigation";
+import { AiFillDelete } from "react-icons/ai";
+import { LuEdit2 } from "react-icons/lu";
 
 const QuoteCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
   const { data: session } = useSession();
@@ -27,31 +29,31 @@ const QuoteCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
   };
 
   return (
-    <div className='quote_card'>
-      <div className='flex justify-between items-start gap-5'>
+    <div className="quote_card">
+      <div className="flex justify-between items-start gap-5">
         <div
-          className='flex-1 flex justify-start items-center gap-3 cursor-pointer'
+          className="flex-1 flex justify-start items-center gap-3 cursor-pointer"
           onClick={handleProfileClick}
         >
           <Image
             src={post.creator.image}
-            alt='user_image'
+            alt="user_image"
             width={40}
             height={40}
-            className='rounded-full object-contain'
+            className="rounded-full object-contain"
           />
 
-          <div className='flex flex-col'>
-            <h3 className='font-satoshi font-semibold text-gray-100'>
+          <div className="flex flex-col">
+            <h3 className="font-satoshi font-semibold text-gray-100">
               {post.creator.username}
             </h3>
-            <p className='font-inter text-sm text-gray-300'>
+            <p className="font-inter text-sm text-gray-300">
               {post.creator.email}
             </p>
           </div>
         </div>
 
-        <div className='copy_btn' onClick={handleCopy}>
+        <div className="copy_btn" onClick={handleCopy}>
           <Image
             src={
               copied === post.quote
@@ -65,27 +67,24 @@ const QuoteCard = ({ post, handleEdit, handleDelete, handleTagClick }) => {
         </div>
       </div>
 
-      <p className='my-4 font-satoshi text-sm text-white'>{post.quote}</p>
+      <p className="my-4 font-satoshi text-sm text-white">{post.quote}</p>
       <p
-        className='font-inter text-sm blue_gradient cursor-pointer'
+        className="font-inter text-sm blue_gradient cursor-pointer"
         onClick={() => handleTagClick && handleTagClick(post.tag)}
       >
         #{post.tag}
       </p>
 
       {session?.user.id === post.creator._id && pathName === "/profile" && (
-        <div className='mt-5 flex-center gap-4 border-t border-gray-100 pt-3'>
-          <p
-            className='font-inter text-sm green_gradient cursor-pointer'
-            onClick={handleEdit}
-          >
-            Edit
+        <div className="mt-5 flex-center gap-4 border-t border-gray-100 pt-3">
+          <p className="font-inter text-sm cursor-pointer" onClick={handleEdit}>
+            <LuEdit2 className="icon text-green-500" />
           </p>
           <p
-            className='font-inter text-sm orange_gradient cursor-pointer'
+            className="font-inter text-sm cursor-pointer"
             onClick={handleDelete}
           >
-            Delete
+            <AiFillDelete className="icon text-red-500" />
           </p>
         </div>
       )}
