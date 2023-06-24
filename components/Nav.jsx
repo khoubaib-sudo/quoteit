@@ -86,11 +86,11 @@ const Nav = () => {
                   My Profile
                 </Link>
                 <Link
-                  href="/create-quotes"
+                  href="/create-quote"
                   className="dropdown_link"
                   onClick={() => setToggleDropdown(false)}
                 >
-                  Create Quote
+                  Create post
                 </Link>
                 <button
                   type="button"
