@@ -1,20 +1,32 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 
 import QuoteCard from "./QuoteCard";
 
 const QuoteCardList = ({ data, handleTagClick }) => {
   return (
-    <div className='mt-16 quote_layout'>
-      {data.map((post) => (
-        <QuoteCard
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className='mt-16 quote_layout'
+    >
+      {data.map((post, index) => (
+        <motion.div
           key={post._id}
-          post={post}
-          handleTagClick={handleTagClick}
-        />
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: index * 0.2 }}
+        >
+          <QuoteCard
+            post={post}
+            handleTagClick={handleTagClick}
+          />
+        </motion.div>
       ))}
-    </div>
+    </motion.div>
   );
 };
 
@@ -68,24 +80,21 @@ const Feed = () => {
   };
 
   return (
-    <section className='feed'>
-      <form className='relative w-full flex-center'>
+    <section className="feed">
+      <form className="relative w-full flex-center">
         <input
-          type='text'
-          placeholder='Search for a tag or a username'
+          type="text"
+          placeholder="Search for a tag or a username"
           value={searchText}
           onChange={handleSearchChange}
           required
-          className='search_input peer'
+          className="search_input peer"
         />
       </form>
 
       {/* All Quotes */}
       {searchText ? (
-        <QuoteCardList
-          data={searchedResults}
-          handleTagClick={handleTagClick}
-        />
+        <QuoteCardList data={searchedResults} handleTagClick={handleTagClick} />
       ) : (
         <QuoteCardList data={allPosts} handleTagClick={handleTagClick} />
       )}
